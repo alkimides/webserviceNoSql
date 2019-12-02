@@ -1,0 +1,170 @@
+﻿@page
+@model WebApplication2.Pages.partidospoliticosModel
+@{
+    ViewData["Title"] = "partidospoliticos";
+}
+
+<h2>partidospoliticos</h2>
+
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+
+
+    </head>
+
+    <body>
+       
+        <div class="container">
+            <div class="tab tab-1">
+            <!--tabla html para la web-->
+            <table id="tablaPartidos" class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th style="width:150px">Nombre</th>
+                        <th style="width:150px">Siglas</th>
+                        <th style="width:150px">Descripcion</th>
+                        <th style="width:150px">Posicion</th>
+                        <th style="width:150px">Votantes</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var partidos in Model.partidospoliticos)
+                    {
+                        <tr>
+                            <td>@partidos.Nombre</td>
+                            <td>@partidos.Siglas</td>
+                            <td>@partidos.Descripcion</td>
+                            <td>@partidos.Posicion</td>
+                            <td>@partidos.Votantes</td>
+                            <td><input type="button" value="Remove" onclick="Remove(this)" /></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoor>
+                    <tr>
+                        <td><input type="text" id="txtNombre" /></td>
+                        <td><input type="text" id="txtSiglas" /></td>
+                        <td><input type="text" id="txtDescripcion" /></td>
+                        <td><input type="text" id="txtPosicion" /></td>
+                        <td><input type="text" id="txtVotantes" /></td>
+                        <td><input type="button" id="btnAdd" value="Add" onclick="crearPartido()" /></td>
+                    </tr>
+                </tfoor>
+            </table>
+        </div>
+            <input type="button" id="btnActualizar" value="Lista Partidos" onclick="getAll()" />
+        </div>
+
+        <br />
+
+        @section Scripts {
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+            <script type="text/javascript">
+                //añadimos partido politico mediante POST
+                function crearPartido() {
+
+                    var data = JSON.stringify({
+                        "Nombre": txtNombre.value,
+                        "Siglas": txtSiglas.value,
+                        "Descripcion": txtDescripcion.value,
+                        "Posicion": txtPosicion.value,
+                        "Votantes" : txtVotantes.value,
+                    });
+
+                    var api = new XMLHttpRequest();
+                    api.withCredentials = false;
+
+                    api.addEventListener("readystatechange", function () {
+
+                        if (this.readyState == 4) {
+                            console.log(this.responseText);
+                        }
+
+                    });
+
+                    api.open("POST","https://politics-a056.restdb.io/rest/partidospoliticos");
+                    api.setRequestHeader("content-type", "application/json");
+                    api.setRequestHeader("x-apikey", "5de58f974658275ac9dc21e9");
+                    api.setRequestHeader("cache-control", "no-cache");
+
+                    api.send(data);
+
+
+
+                }
+
+                function borrarPartido(value) {
+                    var data = null;
+
+                    var api = new XMLHttpRequest();
+
+                    api.withCredentials = false;
+
+                    api.addEventListener("readystatechange", function () {
+
+                        if (this.readyState == 4) {
+                            console.log(this.responseText);
+                            let datos = JSON.parse(this.responseText);
+                        }
+
+
+                    });
+                }
+                //para mostrar toda la tabla
+                function getAll() {
+                    let api = new XMLHttpRequest();
+                    //configuramos open
+                    api.open('GET', 'https://politics-a056.restdb.io/rest/partidospoliticos');
+                    //enviamos
+                    api.setRequestHeader("content-type", "application/json");
+                    api.setRequestHeader("x-apikey", "5de58f974658275ac9dc21e9");
+                    api.setRequestHeader("cache-control", "no-cache");
+
+                    api.send();
+
+                    //conseguimos respuesta
+
+                    api.onreadystatechange = function () {
+                        //preguntamos por estados
+                        if (this.readyState == 4 && this.status == 200) {
+                            //obtenemos JSON
+                            let datos = JSON.parse(this.responseText);
+
+                            let res = document.querySelector("#tablaPartidos");
+                            //clear table
+                            res.innerHTML = '';
+
+                            //ACCEDEMOS A DATOS CON BUCLE
+
+                            for (let item of datos) {
+                                res.innerHTML += `
+                                    <tr>
+                                        <td>${item.Nombre}</td>
+                                        <td>${item.Siglas}</td>
+                                        <td>${item.Descripcion}</td>
+                                        <td>${item.Posicion}</td>
+                                        <td>${item.Votantes}</td>
+                                    </tr>
+                                `
+                            }
+                        }
+                    }
+
+             
+
+                }
+                
+            </script>
+            }
+
+        </body>
+</html>
+
+
+

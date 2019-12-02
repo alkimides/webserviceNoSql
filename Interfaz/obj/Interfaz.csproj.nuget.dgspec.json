@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\InakiAlkiza\\webapi\\WebApplication1\\Interfaz\\Interfaz.csproj": {}
+  },
+  "projects": {
+    "D:\\InakiAlkiza\\webapi\\WebApplication1\\Interfaz\\Interfaz.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\InakiAlkiza\\webapi\\WebApplication1\\Interfaz\\Interfaz.csproj",
+        "projectName": "Interfaz",
+        "projectPath": "D:\\InakiAlkiza\\webapi\\WebApplication1\\Interfaz\\Interfaz.csproj",
+        "packagesPath": "C:\\Users\\iñakialkiza\\.nuget\\packages\\",
+        "outputPath": "D:\\InakiAlkiza\\webapi\\WebApplication1\\Interfaz\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\iñakialkiza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
